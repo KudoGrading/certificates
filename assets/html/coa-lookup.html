@@ -55,14 +55,16 @@
                   button = document.getElementById('verifyBtn')
             button.addEventListener('click', verify)
             input.addEventListener('keydown', ({ key }) => { if (key == 'Enter') verify() })
+            addEventListener('pageshow', () => { // reset button
+                button.disabled = false ; button.textContent = 'Verify Certificate' ; input.focus() })
             function verify() {
                 const certNumber = input.value.trim()
                 if (!certNumber)
                     return alert('Please enter a certificate number')
                 if (!/^\d+$/.test(certNumber))
                     return alert('Certificate number must contain only digits')
-                button.disabled = true ; button.textContent = 'Redirecting...'
-                window.location.href = `https://cert.kudoauthentication.com/${certNumber}`
+                button.disabled = true ; button.textContent = 'Retrieving...'
+                location.href = `https://cert.kudoauthentication.com/${certNumber}`
             }
         </script>
     </body>
